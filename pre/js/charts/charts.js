@@ -27,7 +27,7 @@ export function initChart(iframe) {
         data = data.filter(function(item) { if(item.sexo != 'Ambos sexos'){ return item; }});
 
         //Declaramos fuera las variables genéricas
-        let margin = {top: 20, right: 20, bottom: 20, left: 85},
+        let margin = {top: 20, right: 20, bottom: 20, left: 55},
             width = document.getElementById('chart').clientWidth - margin.left - margin.right,
             height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
@@ -42,7 +42,7 @@ export function initChart(iframe) {
 
         //Ejes X
         let x = d3.scaleLinear()
-            .domain([0,1])
+            .domain([0,100])
             .range([0,width]);
 
         let xAxis = d3.axisBottom(x).ticks(5);
