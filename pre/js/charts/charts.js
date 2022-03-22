@@ -21,9 +21,10 @@ COLOR_OTHER_2 = '#731854';
 
 export function initChart(iframe) {
     //Desarrollo del gráfico
-    d3.csv('https://raw.githubusercontent.com/CarlosMunozDiazCSIC/informe_perfil_mayores_2022_social_4_1/main/data/convivencia_mas65_eurostat.csv', function(error,data) {
+    d3.csv('https://raw.githubusercontent.com/CarlosMunozDiazCSIC/informe_perfil_mayores_2022_social_4_3/main/data/estado_civil_fallecer_2020_v2.csv', function(error,data) {
         if (error) throw error;
-        console.log(data);
+        
+        data = data.filter(function(item) { if(item.sexo != 'Ambos sexos'){ return item; }});
 
         //Declaramos fuera las variables genéricas
         let margin = {top: 20, right: 20, bottom: 20, left: 85},
@@ -37,11 +38,11 @@ export function initChart(iframe) {
             .append("g")
               .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         
-        let gruposEstado = ['casados_porc','separados_porc', 'solteros_porc', 'viudos_porc'];
+        let gruposEstado = ['solteros_porc', 'casados_porc', 'viudos_porc', 'separados_porc'];
 
         //Ejes X
         let x = d3.scaleLinear()
-            .domain([0,100])
+            .domain([0,1])
             .range([0,width]);
 
         let xAxis = d3.axisBottom(x).ticks(5);
@@ -71,6 +72,8 @@ export function initChart(iframe) {
             .keys(gruposEstado)
             (data);
 
+        console.log(stackedDataEstado);
+
         function init() {
             svg.append("g")
                 .attr('class','chart-g')
@@ -84,7 +87,7 @@ export function initChart(iframe) {
                 .enter()
                 .append("rect")
                 .attr('class','prueba')
-                .attr("y", function(d) { return y(d.data.grupo) + y.bandwidth() / 4; })
+                .attr("y", function(d) { return y(d.data.sexo) + y.bandwidth() / 4; })
                 .attr("x", function(d) { return 0; })
                 .attr("width", function(d) { return x(0); })
                 .attr("height", y.bandwidth() / 2)
@@ -96,7 +99,7 @@ export function initChart(iframe) {
 
         function animateChart() {
             svg.selectAll('.prueba')
-                .attr("y", function(d) { return y(d.data.grupo) + y.bandwidth() / 4; })
+                .attr("y", function(d) { return y(d.data.sexo) + y.bandwidth() / 4; })
                 .attr("x", function(d) { return 0; })
                 .attr("width", function(d) { return x(0); })
                 .attr("height", y.bandwidth() / 2)
