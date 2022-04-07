@@ -72,8 +72,6 @@ export function initChart(iframe) {
             .keys(gruposEstado)
             (data);
 
-        console.log(stackedDataEstado);
-
         function init() {
             svg.append("g")
                 .attr('class','chart-g')
@@ -142,7 +140,7 @@ export function initChart(iframe) {
         let pngDownload = document.getElementById('pngImage');
 
         pngDownload.addEventListener('click', function(){
-            setChartCanvasImage('estado_civil_fallecimiento');
+            //setChartCanvasImage('estado_civil_fallecimiento');
             setChartCustomCanvasImage('estado_civil_fallecimiento');
         });
 
