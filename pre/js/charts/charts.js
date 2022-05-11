@@ -121,10 +121,14 @@ export function initChart() {
                         this.style.opacity = '1';
                     });
 
+                    
+
                     //Texto                  
                     let sexo = d.data.sexo == 'Mujeres' ? 'mujeres' : 'hombres';
+                    let dataSexo = sexo == 'mujeres' ? 1 : 0;
+
                     let html = '<p class="chart__tooltip--title">' + dictionary[current] + '</p>' + 
-                        '<p class="chart__tooltip--text">Al fallecer, un <b>' + numberWithCommas3(parseFloat(data[1][current]).toFixed(2)) + '%</b> de <b>' + sexo + '</b> con 65 y más años lo hace bajo este estado civil</p>';
+                        '<p class="chart__tooltip--text">Al fallecer, un <b>' + numberWithCommas3(parseFloat(data[dataSexo][current]).toFixed(2)) + '%</b> de <b>' + sexo + '</b> con 65 y más años lo hace bajo este estado civil</p>';
             
                     tooltip.html(html);
 
