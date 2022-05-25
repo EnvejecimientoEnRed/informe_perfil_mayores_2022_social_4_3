@@ -23,7 +23,7 @@ let dictionary = {
 
 export function initChart() {
     //Desarrollo del gráfico
-    d3.csv('https://raw.githubusercontent.com/CarlosMunozDiazCSIC/informe_perfil_mayores_2022_social_4_3/main/data/estado_civil_fallecer_2020_v2.csv', function(error,data) {
+    d3.csv('https://raw.githubusercontent.com/EnvejecimientoEnRed/informe_perfil_mayores_2022_social_4_3/main/data/estado_civil_fallecer_2020_v2.csv', function(error,data) {
         if (error) throw error;
         
         data = data.filter(function(item) { if(item.sexo != 'Ambos sexos'){ return item; }});
